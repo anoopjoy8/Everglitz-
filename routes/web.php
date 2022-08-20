@@ -1,10 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Front\HomeController;
 use App\Http\Controllers\Admin\AdminuserController;
 use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\AjaxController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Middleware\CustomAuth;
 
 /*
@@ -17,10 +19,10 @@ use App\Http\Middleware\CustomAuth;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//Front routes
+Route::get('/',[HomeController::class,'index']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 
     Route::get('admin/',[AdminuserController::class, 'index']);
@@ -47,6 +49,9 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 
     //General Settings
     Route::match(['get','post'],'change-password',[MenuController::class,'changePassword']);
+
+    //Contact Details
+    Route::match(['get','post'],'list-contact-details',[ContactController::class,'index']);
 
     //Ajax
     Route::get('delete-image',[AjaxController::class,'DeleteImage']);

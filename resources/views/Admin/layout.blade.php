@@ -21,7 +21,7 @@
     <!-- inject:css -->
     <link rel="stylesheet" href="{{env('ASSET_URL')}}/admin/css/vertical-layout-light/style.css">
     <!-- endinject -->
-    <link rel="shortcut icon" href="{{env('ASSET_URL')}}/admin/images/favicon.png" />
+    <link rel="shortcut icon" href="{{env('ASSET_URL')}}/front/images/favicon.jpg" />
     @yield('header-script')
 </head>
 
