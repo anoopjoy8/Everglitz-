@@ -4,38 +4,26 @@
 <!----- Add custom scripts here --->
 @endsection
 @section('content')
-<!---- Add Div starts here --->
-<div style="display:{{$add_div}}">
+<!---- Search Div starts here --->
+<div style="display:{{$srch_div}}">
   <div class="col-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
-        <h4 class="card-title"> Contact Informations</h4>
-        <form class="forms-sample" role="form" action="{{ url('admin/update-contact')  }}" method="post" enctype="multipart/form-data" id="form">
+        <h4 class="card-title"> Search Service Informations</h4>
+        <form class="forms-sample" role="form" action="{{url('admin/list-services')}}" method="post" enctype="multipart/form-data" id="form">
           @csrf
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="form-group">
-                <label for="exampleInputName1">Phone 1</label>
-                <input type="text" name="phone1" class="form-control" value="{{ $phone1 ?? old('phone1')}}" id="exampleInputName1" placeholder="Phone 1">
-                <input type="hidden" name="id" value=1>
+                <label for="exampleInputName1">Title</label>
+                <input type="text" name="titlep" class="form-control" value="{{ $titlep ?? old('titlep')}}" id="exampleInputName1" placeholder="Title">
+                <input type="hidden" name="sr" value="yes">
                 <input type="hidden" name="page" value={{$page ?? ''}}>
               </div>
             </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="exampleInputName1">Phone 2</label>
-                <input type="text" name="phone2" class="form-control" value="{{ $phone2 ?? old('phone2')}}" id="exampleInputName1" placeholder="Phone 2">
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="form-group">
-                <label for="exampleInputName1">Email</label>
-                <input type="text" name="email" class="form-control" value="{{ $email ?? old('email')}}" id="exampleInputName1" placeholder="Email">
-              </div>
-            </div>
           </div>
-          <button type="submit" class="btn btn-{{getButton($id ??"")['button_labl']}} me-2">{{getButton($id ??"")['button_sta']}}</button>
-          <button class="btn btn-light">Cancel</button>
+          <button type="submit" class="btn btn-primary me-2">Search</button>
+          <a href="{{ url('admin/list-services')}}"><button class="btn btn-light">Cancel</button></a>
           @csrf
         </form>
       </div>
@@ -51,7 +39,19 @@
           <h4 class="card-title cardtitle">{{$title}}</h4>
         </div>
         <div class="col-md-4 menu-button">
-          <a href="{{ url('admin/list-contact-details')}}">
+          <a href="{{ url('admin/add-services')}}">
+            <button type="button" class="btn btn-primary btn-icon-text">
+              <i class="fa-solid fa-file-lines"></i>
+              Add
+            </button>
+          </a>
+          <a href="{{ url('admin/list-services?search=1')}}">
+            <button type="button" class="btn btn-success btn-icon-text">
+              <i class="fa-solid fa-filter"></i>
+              Search
+            </button>
+          </a>
+          <a href="{{ url('admin/list-services')}}">
             <button type="button" class="btn btn-warning btn-icon-text">
               <i class="fa-solid fa-arrows-rotate"></i>
               Refresh
@@ -63,24 +63,32 @@
         <table class="table">
           <thead>
             <tr>
-              <th>Phone 1</th>
-              <th>Phone 2</th>
-              <th>Email</th>
+              <th>Title</th>
+              <th>Description</th>
+              <th>Image</th>
               <th>Action</th>
             </tr>
           </thead>
           <tbody>
-            @if($contact_list->count()>0)
-            @foreach($contact_list as $key=>$val)
+            @if($service_list->count()>0)
+            @foreach($service_list as $key=>$val)
             <tr>
-              <td>{{$val->phone1}}</td>
-              <td>{{$val->phone2}}</td>
-              <td>{{$val->email}}</td>
-
+              <td>{{$val->title}}</td>
+              <td>{{Str::words(($val->description),'3','...') }}</td>
               <td>
-                <a href="{{ url('admin/list-contact-details?edit='.$val->id.'&page='.$page) }}">
+                @if($val->image)
+                <img class="thumb-image" src="{{ url('thumbnail/'.$val->image) }}">
+                @endif
+              </td>
+              <td>
+                <a href="{{ url('admin/update-services?edit='.$val->id.'&page='.$page) }}">
                   <button type="button" class="btn btn-sm btn-success btn-icon no-round">
                     <i class="fa-solid fa-pen-to-square"></i>
+                  </button>
+                </a>
+                <a href="{{ url('admin/delete-services?id='.$val->id.'&page='.$page) }}" onClick="return confirm('Do you want to delete this Service?')">
+                  <button type="button" class="btn btn-sm btn-danger btn-icon no-round">
+                    <i class="fa-solid fa-trash"></i>
                   </button>
                 </a>
               </td>
@@ -99,7 +107,7 @@
           <div class="btn-group" role="group" aria-label="Basic example">
             @if(!empty(paginate($count)))
             @foreach(paginate($count) as $key=>$val)
-            <a href="{{ url('admin/list-contact-details?page='.$val)}}">
+            <a href="{{ url('admin/list-services?page='.$val)}}">
               <button type="button" class="btn btn-outline-secondary @if($val == $page)pagn @endif ">{{$val}}</button>
             </a>
             @endforeach

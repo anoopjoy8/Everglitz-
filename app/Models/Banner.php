@@ -5,23 +5,23 @@ use Illuminate\Database\Eloquent\Model;
 Use DB;
 use Config;
 
-class Contacts extends Model
+class Banner extends Model
 {
-    protected $table = 'contact_details';
+    protected $table = 'banner';
     protected $primaryKey = 'id';
     public $timestamps = false;
 
     public static function get_page_result($page,$srch)
     {
         $offset= ($page-1) * Config::get('constants.PG_LIMIT_AD');
-        $query = Contacts::select('id','phone1','phone2','email') 
+        $query = Banner::select('id','title','description','image') 
                                  ->orderBy('id','asc');
                                 
         if(!empty($srch))
         {
-            if($srch['phone1'] !="")
+            if($srch['title'] !="")
             {
-                $query->where('phone1','like','%'.$srch['phone1'].'%');
+                $query->where('title','like','%'.$srch['title'].'%');
             } 
         }  
         //print_r($query->toSql()); exit();            
@@ -31,16 +31,22 @@ class Contacts extends Model
     }
     public static function get_result($id)
     {
-        $query = Contacts::where('id',$id);
+        $query = Banner::where('id',$id);
         return $query->first();
  
     }
-    public static function update_contact($fields, $dbtable, $id)
+    public static function update_banner($fields, $dbtable, $id)
     {
         $update = DB::table($dbtable)
             ->where('id', $id)
             ->update($fields);
         return DB::getPdo()->lastInsertId();
+    }
+    public static function get_image_name($id)
+    {
+        $query = Banner::select('image')
+                ->where('id',$id);
+        return $query->first();        
     }
 }
 

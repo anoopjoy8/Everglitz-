@@ -61,32 +61,18 @@
 
         <div class="row">
 
+            @if($portfolio_data->count()>0)
+            @foreach($portfolio_data as $key=>$val)
             <div class="col-md-4">
                 <div class="bnr_box">
-                    <div class="img"><img src="{{env('ASSET_URL')}}/Front/images/event_1.png"></div>
+                    <div class="img"><img src="{{ url('uploads/'.$val->image) }}"></div>
                     <div class="img_txt">
-                        <h3>Birds of Fairy</h3>
+                        <h3>{{$val->title}}</h3>
                     </div>
                 </div>
             </div>
-
-            <div class="col-md-4">
-                <div class="bnr_box">
-                    <div class="img"><img src="{{env('ASSET_URL')}}/Front/images/event_2.png"></div>
-                    <div class="img_txt">
-                        <h3>Birds of Fairy</h3>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="bnr_box">
-                    <div class="img"><img src="{{env('ASSET_URL')}}/Front/images/event_3.png"></div>
-                    <div class="img_txt">
-                        <h3>Birds of Fairy</h3>
-                    </div>
-                </div>
-            </div>
+            @endforeach
+            @endif
 
         </div>
 
@@ -110,43 +96,24 @@
 
             <div class="col-md-12 list p-md-0 p-3">
 
+                @if($service_data->count()>0)
+                @foreach($service_data as $key=>$val)
+
                 <div class="box05 row m-0">
                     <div class="col-md-3 p-0 crs_img">
-                        <img src="{{env('ASSET_URL')}}/Front/images/serv_1.png">
+                    <img src="{{ url('uploads/'.$val->image) }}">
                     </div>
                     <div class="col-md-9 flx_serv">
-                        <h2><a href="#">Planning your Dream day:</a></h2>
+                        <h2><a href="#">{{$val->title}}:</a></h2>
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                             Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
                             of type and scrambled it to make a type specimen book.</p>
                     </div>
                 </div>
+                @endforeach
+                @endif
 
 
-                <div class="box05 row m-0">
-                    <div class="col-md-3 p-0 crs_img">
-                        <img src="{{env('ASSET_URL')}}/Front/images/serv_2.png">
-                    </div>
-                    <div class="col-md-9 flx_serv">
-                        <h2><a href="#">Stage designing and Conceptualization </a></h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                            of type and scrambled it to make a type specimen book.</p>
-                    </div>
-                </div>
-
-
-                <div class="box05 row m-0">
-                    <div class="col-md-3 p-0 crs_img">
-                        <img src="{{env('ASSET_URL')}}/Front/images/serv_3.png">
-                    </div>
-                    <div class="col-md-9 flx_serv">
-                        <h2><a href="#">Production and Site management </a></h2>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley
-                            of type and scrambled it to make a type specimen book.</p>
-                    </div>
-                </div>
 
 
             </div>

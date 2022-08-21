@@ -1,10 +1,10 @@
+var url    = "http://127.0.0.1:8000/admin/";
 $(document).ready(function(){
     $('#clmsg').click(function(){
         if ($('#msg1').css('opacity') == 0) $('#msg1').css('opacity', 1);
         else $('#msg1').css('opacity', 0);
     });
 });
-
 $(document).ready(function() {
   $('#summernote').summernote();
 });
@@ -88,8 +88,24 @@ function DeleteImage(id,page_id) {
     ({
         type     : 'get',
         dataType : "html",
-        url      :'http://127.0.0.1:8000/admin/delete-image',
+        url      :url+'delete-image',
         data     : {id:id,page_id:page_id},
+        success  : function(res) 
+        {
+          $('#image_div').html(res);
+        }
+     });  
+  }
+}
+function DeletepImage(id,portfolio_id) {
+  var result = confirm("Do you want to delete this Image?");
+  if(result == true){
+    $.ajax
+    ({
+        type     : 'get',
+        dataType : "html",
+        url      :url+'delete-pimage',
+        data     : {id:id,portfolio_id:portfolio_id},
         success  : function(res) 
         {
           $('#image_div').html(res);

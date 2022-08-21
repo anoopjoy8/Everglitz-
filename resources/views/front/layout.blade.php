@@ -29,9 +29,9 @@
 
             <div class="top_area">
                 <ul class="top_ph">
-                    <li><i class="far fa-envelope" aria-hidden="true"></i>info@startupkochi.in</li>
-                    <li><i class="fas fa-phone-alt" aria-hidden="true"></i>+91 1234567890</li>
-                    <li class="wts"><i class="fab fa-whatsapp" aria-hidden="true"></i>+91 1234567890</li>
+                    <li><i class="far fa-envelope" aria-hidden="true"></i>{{$email}}</li>
+                    <li><i class="fas fa-phone-alt" aria-hidden="true"></i>{{$phone1}}</li>
+                    <li class="wts"><i class="fab fa-whatsapp" aria-hidden="true"></i>{{$phone2}}</li>
                 </ul>
             </div>
 
@@ -51,7 +51,6 @@
                         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
                         <a href="#">Wedding Planner</a>
                         <a href="#">Portfolio</a>
-                        <a href="#">Stories</a>
                         <a href="#">Services</a>
                         <a href="#">Contact uS</a>
                     </div>
@@ -70,9 +69,9 @@
                 <div class="col-md-9 right-side p-0">
                     <div class="flex">
                         <ul class="top_ph">
-                            <li><i class="far fa-envelope"></i>info@email.in</li>
-                            <li><i class="fas fa-phone-alt"></i>+91 1234567890</li>
-                            <li class="wts"><i class="fab fa-whatsapp"></i>+91 1234567890</li>
+                            <li><i class="far fa-envelope"></i>{{$email}}</li>
+                            <li><i class="fas fa-phone-alt"></i>{{$phone1}}</li>
+                            <li class="wts"><i class="fab fa-whatsapp"></i>{{$phone2}}</li>
                         </ul>
                     </div>
                     <div class="col-md-12 hidden-mob">

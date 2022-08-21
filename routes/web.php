@@ -7,6 +7,10 @@ use App\Http\Controllers\Admin\MenuController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\Admin\AjaxController;
 use App\Http\Controllers\Admin\ContactController;
+use App\Http\Controllers\Admin\PortfolioController;
+use App\Http\Controllers\Admin\ServicesController;
+use App\Http\Controllers\Admin\BannerController;
+use App\Http\Controllers\Admin\EnquiryController;
 use App\Http\Middleware\CustomAuth;
 
 /*
@@ -27,6 +31,7 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 
     Route::get('admin/',[AdminuserController::class, 'index']);
     Route::match(['get','post'],'login',[AdminuserController::class,'index']);
+
     //Menu 
     Route::get('dashboard',[MenuController::class,'home']);
     Route::match(['get','post'],'list-menu',[MenuController::class,'index']);
@@ -52,8 +57,30 @@ Route::group(['prefix' => 'admin','middleware' => 'auth'], function () {
 
     //Contact Details
     Route::match(['get','post'],'list-contact-details',[ContactController::class,'index']);
+    Route::match(['get','post'],'update-contact',[ContactController::class,'Update']);
+
+    //Portfolio
+    Route::match(['get','post'],'list-portfolio',[PortfolioController::class,'index']);
+    Route::match(['get','post'],'add-portfolio',[PortfolioController::class,'Add']);
+    Route::match(['get','post'],'update-portfolio',[PortfolioController::class,'Update']);
+    Route::get('delete-portfolio',[PortfolioController::class,'Delete']);
+
+    //Services
+    Route::match(['get','post'],'list-services',[ServicesController::class,'index']);
+    Route::match(['get','post'],'add-services',[ServicesController::class,'Add']);
+    Route::match(['get','post'],'update-services',[ServicesController::class,'Update']);
+    Route::get('delete-services',[ServicesController::class,'Delete']);
+
+    //Banner Details
+    Route::match(['get','post'],'list-banner-image',[BannerController::class,'index']);
+    Route::match(['get','post'],'update-banner',[BannerController::class,'Update']);
+
+    //Enquiry
+    Route::match(['get','post'],'list-enquiry',[EnquiryController::class,'index']);
+    Route::get('delete-enquiry',[EnquiryController::class,'Delete']);
 
     //Ajax
     Route::get('delete-image',[AjaxController::class,'DeleteImage']);
+    Route::get('delete-pimage',[AjaxController::class,'DeletepImage']);
 
 });
