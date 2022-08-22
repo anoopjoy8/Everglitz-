@@ -65,7 +65,7 @@
             <tr>
               <th>Title</th>
               <th>Description</th>
-              <th>Image</th>
+              <th>Image <b>(500 × 324 px)</b></th>
               <th>Action</th>
             </tr>
           </thead>
@@ -74,7 +74,7 @@
             @foreach($service_list as $key=>$val)
             <tr>
               <td>{{$val->title}}</td>
-              <td>{{Str::words(($val->description),'3','...') }}</td>
+              <td><?=Str::words(($val->description),'3','...') ?> </td>
               <td>
                 @if($val->image)
                 <img class="thumb-image" src="{{ url('thumbnail/'.$val->image) }}">
